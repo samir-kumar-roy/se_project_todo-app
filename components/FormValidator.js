@@ -9,7 +9,7 @@ class FormValidator {
     this._formElement = formEl;
   }
   _hasInvalidInput() {
-    return this._inputListinputList.some((inputElement) => {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
@@ -44,6 +44,7 @@ class FormValidator {
     }
   }
   _setEventListeners() {
+    this._submitButton = document.querySelector(this._submitButtonSelector);
     this._inputList = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
     );
@@ -51,7 +52,6 @@ class FormValidator {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._submitButton = document.querySelector(this._submitButtonSelector);
         this._toggleButtonState(this._inputList, this._submitButton);
       });
     });
