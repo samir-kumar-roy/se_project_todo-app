@@ -26,5 +26,6 @@ const validationConfig = {
   errorClass: "popup__error_visible",
   inputErrorClass: "popup__input_type_error",
   inactiveButtonClass: "button_disabled",
+  todoDeleteButtonSelector: ".todo__delete-btn",
 };
 export { initialTodos, validationConfig };
