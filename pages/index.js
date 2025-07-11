@@ -1,6 +1,5 @@
 import { initialTodos, validationConfig } from "../utils/constants.js";
 import { Todo } from "../components/Todo.js";
-import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 import { FormValidator } from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -8,8 +7,6 @@ import TodoCounter from "../components/TodoCounter.js";
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopupEl = document.querySelector("#add-todo-popup");
 const addTodoForm = document.forms["add-todo-form"];
-const addTodoCloseBtn = addTodoPopupEl.querySelector(".popup__close");
-const todosList = document.querySelector(".todos__list");
 const todoCounter = new TodoCounter(initialTodos, ".counter__text");
 const handleCheck = (completed) => {
   todoCounter.updateCompleted(completed);
@@ -42,7 +39,7 @@ const section = new Section({
   items: initialTodos,
   renderer: (item) => {
     const element = generateTodo(item);
-    todosList.append(element);
+    section.addItem(element);
   },
   containerSelector: ".todos__list",
 });
@@ -55,7 +52,7 @@ const closeModal = (modal) => {
 
 const renderTodo = (item) => {
   const todo = generateTodo(item);
-  todosList.append(todo);
+  section.addItem(todo);
 };
 
 addTodoButton.addEventListener("click", () => {
@@ -76,7 +73,7 @@ const addTodoPopup = new PopupWithForm({
 });
 addTodoPopup.setEventListeners();
 
-const openModal = (modal) => {
+const openModal = () => {
   addTodoPopup.open();
 };
 export { validationConfig };
